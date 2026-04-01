@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صفحة تحميل التطبيقات</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-2: rgba(255, 255, 255, 0.12);
+      --text: #e5eefc;
+      --muted: #b7c3dc;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.18), transparent 30%),
+        radial-gradient(circle at left center, rgba(34, 197, 94, 0.14), transparent 25%),
+        linear-gradient(180deg, #0b1220 0%, var(--bg) 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      font-size: 20px;
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+    }
+
+    .badge {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #ccefff;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      margin-top: 28px;
+      padding: 40px 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.07));
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+    }
+
+    .lead {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.9;
+      max-width: 58ch;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #60a5fa);
+      color: #07111f;
+      box-shadow: 0 12px 26px rgba(56, 189, 248, 0.24);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .stat {
+      padding: 12px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--border);
+      min-width: 140px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .phone {
+      width: 100%;
+      max-width: 330px;
+      margin: 0 auto;
+      padding: 18px;
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .phone-screen {
+      border-radius: 24px;
+      padding: 18px;
+      min-height: 420px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.72));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .app-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 14px;
+    }
+
+    .app-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .app-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #22c55e, #38bdf8);
+      font-size: 22px;
+    }
+
+    .app-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+
+    .app-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .app-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #ccefff;
+      font-size: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.22);
+    }
+
+    .mini-btn {
+      padding: 9px 12px;
+      border-radius: 12px;
+      background: rgba(34, 197, 94, 0.15);
+      color: #dfffe8;
+      font-size: 12px;
+      text-decoration: none;
+      border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+
+    .section {
+      margin-top: 28px;
+      padding: 26px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .section h2 {
+      margin: 0 0 16px;
+      font-size: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .feature .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      font-size: 20px;
+    }
+
+    .feature h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .downloads {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .download-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .download-card h3 { margin: 0 0 8px; }
+    .download-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .download-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      margin-top: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 10px 0 0;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid,
+      .downloads {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        border-radius: 24px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function downloadDemo(filename, content) {
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">⬇</div>
+        <div>
+          <div>صفحة تحميل التطبيقات</div>
+          <small style="color: var(--muted);">جاهزة للتعديل على GitHub Pages</small>
+        </div>
+      </div>
+      <div class="badge">تصميم مجاني وسهل التعلم</div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <h1>صفحة بسيطة وجميلة لعرض تطبيقاتك وتحميلها لاحقًا</h1>
+          <p class="lead">
+            هذه مجرد واجهة تصميم، بدون ملفات تطبيقات الآن. يمكنك تعلم كيف تضع العناوين، الصور، الأزرار، وروابط التحميل لاحقًا عندما تصبح جاهزًا.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#apps">استعراض التصميم</a>
+            <a class="btn btn-secondary" href="#features">ماذا فيها؟</a>
+          </div>
+          <div class="stats">
+            <div class="stat"><strong>100%</strong><span>صفحة ثابتة</span></div>
+            <div class="stat"><strong>مجانية</strong><span>على GitHub Pages</span></div>
+            <div class="stat"><strong>سريعة</strong><span>خفيفة وسهلة</span></div>
+          </div>
+        </div>
+
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="app-card">
+              <div class="app-top">
+                <div class="app-icon">📱</div>
+                <div>
+                  <p class="app-title">اسم التطبيق الأول</p>
+                  <p class="app-desc">وصف قصير للتطبيق يظهر هنا في صفحة التحميل.</p>
+                </div>
+              </div>
+              <div class="app-meta">
+                <span class="tag">APK</span>
+                <button class="mini-btn" onclick="downloadDemo('app-1-demo.txt', 'هذا ملف تجريبي. استبدله لاحقًا بملف تطبيقك الحقيقي على GitHub Pages.')">تحميل تجريبي</button>
+              </div>
+            </div>
+
+            <div class="app-card">
+              <div class="app-top">
+                <div class="app-icon">⭐</div>
+                <div>
+                  <p class="app-title">اسم التطبيق الثاني</p>
+                  <p class="app-desc">هنا تضع اسم مشروعك الثاني أو نسخة أخرى من نفس التطبيق.</p>
+                </div>
+              </div>
+              <div class="app-meta">
+                <span class="tag">نسخة جديدة</span>
+                <button class="mini-btn" onclick="downloadDemo('app-2-demo.txt', 'هذا ملف تجريبي آخر. ضع هنا رابط أو ملف التطبيق لاحقًا.')">تحميل تجريبي</button>
+              </div>
+            </div>
+
+            <div class="app-card">
+              <div class="app-top">
+                <div class="app-icon">🎨</div>
+                <div>
+                  <p class="app-title">تصميم قابل للتعديل</p>
+                  <p class="app-desc">يمكنك تغيير الألوان والاسم والأزرار بسهولة من هذا الملف.</p>
+                </div>
+              </div>
+              <div class="app-meta">
+                <span class="tag">HTML + CSS</span>
+                <button class="mini-btn" onclick="downloadDemo('preview-demo.txt', 'هذه فقط معاينة تعليمية لتجربة زر التحميل.')">معاينة</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <h2>ماذا ستتعلم من هذه الصفحة؟</h2>
+      <div class="grid">
+        <div class="feature">
+          <div class="icon">🧩</div>
+          <h3>تنظيم المحتوى</h3>
+          <p>كيف تضع عنوانًا، وصفًا، وأزرارًا في أماكن مرتبة وواضحة.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🎨</div>
+          <h3>شكل عصري</h3>
+          <p>واجهة داكنة مع تدرجات وزوايا دائرية تجعل الصفحة أجمل.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">📱</div>
+          <h3>مناسبة للجوال</h3>
+          <p>التصميم يتكيف مع الهاتف والكمبيوتر بدون تعقيد.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="apps">
+      <h2>مكان التطبيقات لاحقًا</h2>
+      <div class="downloads">
+        <div class="download-card">
+          <h3>التطبيق الأول</h3>
+          <p>هنا لاحقًا تضع اسم التطبيق، وصفًا بسيطًا، وصورة أو أيقونة، ثم تربط زر التحميل بالملف.</p>
+          <div class="download-row">
+            <button class="btn btn-primary" onclick="downloadDemo('my-app-demo.txt', 'ملف تجريبي للتحميل. استبدل هذا لاحقًا باسم التطبيق والملف الحقيقي.')">زر تحميل</button>
+            <button class="btn btn-secondary" onclick="alert('ضع هنا صفحة تفاصيل التطبيق لاحقًا')">رابط التفاصيل</button>
+          </div>
+        </div>
+        <div class="download-card">
+          <h3>التطبيق الثاني</h3>
+          <p>يمكنك تكرار نفس البطاقة لكل تطبيق جديد، مع تغيير الاسم والزر فقط.</p>
+          <div class="download-row">
+            <a class="btn btn-primary" href="#">زر تحميل لاحقًا</a>
+            <button class="btn btn-secondary" onclick="alert('ضع هنا صفحة تفاصيل التطبيق لاحقًا')">رابط التفاصيل</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      يمكنك تغيير الاسم والألوان والنصوص من داخل هذا الملف فقط.
+    </footer>
+  </div>
+</body>
+</html>
